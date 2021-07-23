@@ -1,0 +1,142 @@
+#include <iostream>   //pre-requisite
+#include <cstring>    //pre-requisite for comparing strings
+using namespace std;  //pre-requisite
+
+struct library        //structure containing name,author,price and number of copies' arrays.
+{
+    char name[100];
+    char author[50];
+    int price;
+    int copies;
+    
+};
+
+int main()
+{
+    struct library L1[5];
+    int n;
+    char s1[100];   //imp for strcmp with book name
+    char s2[50];    //imp for strcmp with author name
+    int j;
+    int i;
+    for(i=0;i<7;i++)     //main 'for' loop
+    {
+          cout << "Enter Required Option Number\n1)Add A Book\n2)Display Full List\n3)Search by Name\n4)Search by Author\n5)Sort by Name\n";
+          //above output gives 5 options to user
+          cin >> n;
+          switch (n)
+          {
+            case 1:   for(j=i;j<=i;j++) //In this case the librarian inputs book details and are stored in an array.
+                      {
+                        cout << "Enter the book name(do not separate words using spaces)\n"; 
+                        cin >> L1[j].name;
+                        
+                        cout << "Enter the author's name(do not separate words using spaces)\n";
+                        cin >> L1[j].author;
+                        
+                        cout << "Enter the book price\n";
+                        cin >> L1[j].price;
+                        
+                        cout << "Enter the number of copies\n";
+                        cin >> L1[j].copies;
+                      }
+                      break;
+            case 2: cout<<"Full Book List:\n"; //In this case the list of books is displayed, if there is a gap in inputs and then a display is asked, it may skip one number and give error there.
+                    for(j=0;j<i;j++)
+                    {
+                       cout << "\nBook Number " << j+1;
+                       cout<<"\nBook Name: " << L1[j].name << "\nAuthor: " << L1[j].author << "\nPrice: " << L1[j].price << "\nNumber of Copies: " << L1[j].copies << endl;
+                    }
+                    break;
+            
+            case 3:   cout<<"Enter Book Name to Check Availability\n"; //Searching for a book by name and showing number of copies there are.
+                      cin >> s1;
+                      for(j=0;j<i;j++)
+                      {
+                        if(strcmp(s1,L1[j].name)==0)
+                        {
+                          cout<<"Number of Copies: " << L1[j].copies<<endl;
+                          break;
+                        }
+                        else 
+                        {
+                          cout<<"Searching...\n";
+                        }
+                        
+                      }
+                      while(strcmp(s1,L1[j].name)!=0)
+                      {
+                          cout << "Book Unavailable\n";
+                          break;
+                      }
+                      break;
+            case 4:   cout<<"Enter Author Name for more details\n"; //searching for a book by author name, and printing book name and number of copies.
+                      cin>>s2;
+                      for(j=0;j<i;j++)
+                      {
+                        if(strcmp(s2,L1[j].author)==0)
+                        {
+                          cout<<"Books Written by this Author are:\n";
+                          cout<<L1[j].name<<"\nNumber of Copies: "<< L1[j].copies <<endl;
+                          break;
+                        }
+                        else
+                        {
+                            cout<<"Searching...\n";
+                        }
+                      }
+                      while(strcmp(s2,L1[j].author)!=0)
+                      {
+                          cout<<"Author Not in List\n";
+                          break;
+                      }
+                      break;
+                      
+            case 5:   cout<<"Book List in Initial Order\n"; //case to sort in alphabetical order
+                      for(j=0;j<i;j++)
+                      {
+                         //cout << "\nBook Number " << j+1;
+                         cout<<"\nBook Name: " << L1[j].name<<endl; 
+                      }
+                      
+                      cout<<"Book List in Alphabetical Order\n"; //in this case i know i have to give 3 book details therefore this long logical method.
+                      
+                          if(strcmp(L1[0].name,L1[1].name)>0 && strcmp(L1[0].name,L1[2].name)>0 && strcmp(L1[1].name,L1[2].name)>0)
+                          {
+                              cout<<L1[2].name<<endl<<L1[1].name<<endl<<L1[0].name<<endl;
+                          }
+                          else if(strcmp(L1[1].name,L1[0].name)>0 && strcmp(L1[0].name,L1[2].name)>0 && strcmp(L1[1].name,L1[2].name)>0)
+                          {
+                              cout<<L1[2].name<<endl<<L1[0].name<<endl<<L1[1].name<<endl;
+                          }
+                          else if(strcmp(L1[2].name,L1[0].name)>0 && strcmp(L1[2].name,L1[1].name)>0 && strcmp(L1[1].name,L1[0].name)>0)
+                          {
+                              cout<<L1[0].name<<endl<<L1[1].name<<endl<<L1[2].name<<endl;
+                          }
+                          else if(strcmp(L1[1].name,L1[0].name)>0 && strcmp(L1[1].name,L1[2].name)>0 && strcmp(L1[2].name,L1[0].name)>0)
+                          {
+                              cout<<L1[0].name<<endl<<L1[2].name<<endl<<L1[1].name<<endl;
+                          }
+                          else if(strcmp(L1[2].name,L1[1].name)>0 && strcmp(L1[2].name,L1[0].name)>0 && strcmp(L1[0].name,L1[1].name)>0)
+                          {
+                              cout<<L1[1].name<<endl<<L1[0].name<<endl<<L1[2].name<<endl;
+                          }
+                          else if(strcmp(L1[0].name,L1[2].name)>0 && strcmp(L1[0].name,L1[1].name)>0 && strcmp(L1[2].name,L1[1].name)>0)
+                          {
+                              cout<<L1[1].name<<endl<<L1[2].name<<endl<<L1[0].name<<endl;
+                          }
+                          
+                    
+                      break;
+            default: cout<<"Invalid Option\n"; //takes back to option menu if anything other than 1-5 is entered by user.
+          }
+          
+    }
+    if (i>=7)
+    {
+        cout << "Input Limit Reached\n";    //this may not be required for a large library system, but for the short and limited purpose of this practical.
+    }
+    //Main Conclusion - Break statements are CRUCIAL.
+}
+
+
