@@ -1,0 +1,60 @@
+#include <iostream> //imp header file
+#include <cmath>  //necessary for power function
+using namespace std; 
+float pi = 3.1416; //initializing pi value->global variable
+int vol(int a) //function to find volume of cube (of edge length a)
+{
+    return pow(a,3);                  //known formula
+}
+
+float vol(float r) //function to find volume of sphere(of radius r)
+{
+    float vol2;
+    vol2 = (4* pi * pow(r,3))/3;      //known formula
+    return vol2; 
+}
+
+float vol(float r, float h) //function to find volume of cylinder(of radius r and height h)
+{
+    float vol3;
+    vol3 =  pi * pow(r,2) * h;        //known formula
+    return vol3; 
+}
+
+double vol(double x, double y) //function to find volume of cone(of radius x and height y)
+{
+    double vol4;
+    vol4 = (pi * pow(x,2) * y)/3;     //known formula
+    return vol4; 
+}
+
+int main() //main function
+{
+    int a; //declaring local variable for cube volume
+    float r1,r,h; //declaring local variables for sphere and cylinder volume
+    double x,y; //declaring local variables for cone volume
+    cout << "Enter edge length of cube\n"; //user gives edge length of cube
+    cin >> a;
+    cout << "Enter radius of sphere\n"; //user gives radius of sphere
+    cin >> r1;                                       
+    cout << "Enter radius of cylinder\n"; //user gives radius of cylinder
+    cin >> r; 
+    cout << "Enter height of cylinder\n"; //user gives height of cylinder
+    cin >> h;
+    cout << "Enter radius of cone\n"; //user gives radius of cone
+    cin >> x; 
+    cout << "Enter height of cone\n"; //user gives height of cone
+    cin >> y;
+    int vol1 = vol(a); //vol of cube function called
+    cout << "Volume of cube is: " << vol1 <<" cubic units"<< endl; 
+    float vol2 = vol(r1); //vol of sphere function called
+    cout << "Volume of sphere is: " << vol2 <<" cubic units"<< endl; 
+    float vol3 = vol(r,h); //vol of cylinder function called
+    cout << "Volume of cylinder is: " << vol3 <<" cubic units"<< endl; 
+    double vol4 = vol(x,y); //vol of cone function called
+    cout << "Volume of cone is: " << vol4 <<" cubic units"<< endl; 
+    
+    //finding total volume:- (Main Solution)
+    float total_volume = vol1+vol2+vol3+vol4; //declaring total volume formula
+    cout << "Total Volume of all four shapes is: " << total_volume <<" cubic units"<< endl; //final answer
+}
