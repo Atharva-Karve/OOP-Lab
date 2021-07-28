@@ -1,0 +1,92 @@
+#include <iostream>  //imp header file
+using namespace std;
+
+short int add(short int x, short int y)   //function to add short integers
+{
+    return x+y;
+}
+
+long int add(long int x, long int y)      //function to add long integers
+{
+    return x+y;
+}
+
+double add(double x, double y)           //function to add double data type
+{
+    return x+y;
+}
+
+long double add(long double x, long double y)     //function to add long double data type 
+{
+    return x+y;
+}
+
+float add(float x, float y)              //function to add float data type
+{
+    return x+y;
+}
+
+int add(char x, char y) //function to add ASCII values of 2 numbers and give corresponding character
+{                                       // and ascii value as result
+    return x+y;
+} 
+int main()          //main function
+{
+    short int a,b; 
+    long int c,d; 
+    double x,y; 
+    long double e,f;
+    float g,h;
+    char i,j;
+    //all required variables are declared above
+    cout << "Short Int Data Type Addition:\n";      //first sum of short int
+    cout << "Enter first short integer number\n"; 
+    cin >> a;
+    cout << "Enter second short integer number\n"; 
+    cin >> b;
+    short int sum_1 = add(a,b);    //calling short int add func
+    cout << "Sum of 2 numbers of short int data type is: " << sum_1 << endl;
+    
+    cout << "\nLong Int Data Type Addition:\n";  //second sum of long int
+    cout << "Enter first long integer number\n"; 
+    cin >> c;                                       
+    cout << "Enter second long integer number\n"; 
+    cin >> d; 
+    long int sum_2 = add(c,d); //calling long int add func
+    cout << "Sum of 2 numbers of long int data type is: " << sum_2 << endl;
+    
+    cout << "\nDouble Data Type Addition:\n"; //third sum of double
+    cout << "Enter first decimal number\n"; 
+    cin >> x;
+    cout << "Enter second decimal number\n"; 
+    cin >> y;
+    double sum_3 = add(x,y);   //calling double add func
+    cout << "Sum of 2 numbers of double data type is: " << sum_3 << endl;
+    
+    cout << "\nLong Double Data Type Addition:\n";   //fourth sum of long double
+    cout << "Enter first decimal number\n"; 
+    cin >> e;
+    cout << "Enter second decimal number\n"; 
+    cin >> f;
+    long double sum_4 = add(e,f); //calling long double add func
+    cout << "Sum of 2 numbers of long double data type is: " << sum_4 << endl;
+    
+    cout << "\nFloat Data Type Addition:\n";    //fifth sum of float
+    cout << "Enter first decimal number\n"; 
+    cin >> g;
+    cout << "Enter second decimal number\n"; 
+    cin >> h;
+    float sum_5 = add(g,h);   //calling float add func
+    cout << "Sum of 2 numbers of float data type is: " << sum_5 << endl;
+    
+    cout << "\nCharacter Data Type Addition:\n";   //sixth sum of ascii values
+    cout << "Enter first number\n"; 
+    cin >> i;
+    cout << "Enter second number\n"; 
+    cin >> j;
+    char sum_6 = add(i,j);   //calling char add func
+    cout << "Character corresponding to the sum of the ASCII values of given numbers is: " << sum_6 << endl;
+    cout << "ASCII value of the same: " << int(sum_6) << endl;
+    // CONCEPT OF FUNCTION OVERLOADING IS USED.
+}
+
