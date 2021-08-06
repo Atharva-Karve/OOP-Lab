@@ -1,0 +1,42 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+float pi = 3.1416;      //initializing value of pi
+
+inline float vol_cube(float a) //function to find volume of cube (of edge length a)
+{
+    return pow(a,3);                  //known formula
+}
+
+inline float vol_sphere(float r) //function to find volume of sphere(of radius r)
+{
+    float vol2;
+    vol2 = (4* pi * pow(r,3))/3;      //known formula
+    return vol2;
+}
+    
+inline float vol_cylinder(float r, float h) //function to find volume of cylinder(of radius r and height h)
+{
+    float vol3;
+    vol3 =  pi * pow(r,2) * h;        //known formula
+    return vol3; 
+}
+
+inline float vol_cone(float x, float y) //function to find volume of cone(of radius x and height y)
+{
+    float vol4;
+    vol4 = (pi * pow(x,2) * y)/3;     //known formula
+    return vol4; 
+}
+int main()
+{
+    float total_vol;
+    cout << "Volume of cube is: " << vol_cube(4.5) <<" cubic units"<< endl; 
+    cout << "Volume of sphere is: " << vol_sphere(5.3) <<" cubic units"<< endl; 
+    cout << "Volume of cylinder is: " << vol_cylinder(4.1,6.2) <<" cubic units"<< endl;
+    cout << "Volume of cone is: " << vol_cone(3.3,5.7) <<" cubic units"<< endl;
+    total_vol = vol_cube(4.5) + vol_sphere(5.3) + vol_cylinder(4.1,6.2) + vol_cone(3.3,5.7);
+    cout << "Total volume of all 4 shapes combined is: " << total_vol <<" cubic units" << endl;
+    return 0;
+}
+//concept of inline functions used
