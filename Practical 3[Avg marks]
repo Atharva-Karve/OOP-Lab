@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int avg(int *a,int b)
+{
+    int j;
+    int sum = 0;
+    for(j=0;j<b;j++)
+    {
+        sum += *(a+j);
+    }
+    int average = sum/b;
+    cout << "Average Marks: " << average << endl;
+}
+int main()
+{
+  int len;
+  int i;
+  cout << "Enter the no. of students in the class" << endl;
+  cin >> len;
+  int *marks = new int[len]; //Dynamic memory allocation
+  cout << "Enter the marks of each student" << endl;
+  for(i = 0; i < len; i++)
+  {
+    cin >> *(marks+i);//
+  }
+  avg(marks,len);
+  delete [] marks;
+}
