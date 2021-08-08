@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+float in_feet(float *a)
+{
+    float feet;
+    feet = *a/12;
+    cout << "Given measurement in feet is: " << feet << " feet" << endl;
+}
+
+float in_yards(float *a)
+{
+    float yards;
+    yards = *a/36;
+    cout << "Given measurement in yards is: " << yards << " yards" << endl;
+}
+int main()
+{
+    float m;
+    cout << "Enter measurement in inches\n";
+    cin >> m;
+    float *ptr = new float (m);
+    in_feet(ptr);
+    in_yards(ptr);
+    delete ptr;
+}
