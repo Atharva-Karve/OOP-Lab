@@ -1,0 +1,34 @@
+#include <iostream>         //header file
+#include <string>           // header file required
+using namespace std;
+
+void input(string name, int r, char d[] = "Batch 2" ,char p[] = "BTech CSBS");  //declaring input func
+
+int main()
+{
+    int i;
+    string a[3];        //array of strings declared, will help in using for loop
+    int r1[3];          // array of integers for storing roll numbers
+    for(i=0;i<3;i++)    //for loop to take 3 inputs and store it for 3 student list
+    { 
+        cout << "Enter Name of Student " << i+1 << "\n";
+        cin >> a[i];
+        cout << "Enter Roll Number of Student " << i+1 << "\n";
+        cin >> r1[i];
+    }
+    
+    cout << "\nList of Students:\n";    
+    for (i=0;i<3;i++)
+    { 
+       input(a[i],r1[i]);          //input function called for 3 Students
+    }
+    return 0;
+}
+
+void input(string name,int r,char d[], char p[])
+{
+    cout << "Name: " << name << endl << "Roll Number: " << r << endl << "Division: " << d << endl << "Program: " << p <<endl << endl;
+}
+
+//input function uses default value for division and program, for name and eoll number it prints the data student by student.
+// default arguments concept applied.
