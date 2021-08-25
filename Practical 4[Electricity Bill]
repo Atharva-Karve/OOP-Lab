@@ -1,0 +1,94 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class Customer
+{
+    private:           //only accessible to functions in this class
+      long int current_reading;
+      long int last_reading;
+      int i;
+      int j1=0;
+      int j2=0;
+    public:          //accessible to all functions outside the class or in it.
+      string con_name;
+      long int con_no;
+      string con_type;
+      string bill_month;
+      float total_amount;
+      
+      void readData()         //function to take in and read user data
+      {
+          cout << "Enter Name of the Customer (without spaces)\n";
+          cin >> con_name;
+          cout << "Enter the 6 digit Customer Number\n";
+          cin >> con_no;
+          cout << "Enter Customer Type - Commerical or Non-Commercial\n";
+          cin >> con_type;
+          cout << "Enter the month\n";
+          cin >> bill_month;
+      }
+      
+      void calculateBill()              //formula to calculate the total amount
+      {
+          cout << "Enter Last Meter Reading\n";
+          cin >> last_reading;
+          cout << "Enter Current Meter Reading\n";
+          cin >> current_reading;
+          int units = current_reading - last_reading;
+          if (con_type == "Commercial")
+          {
+              for(i=1;i <= units;i++)             
+              {
+                  if (i<=200)                 //two situations to incorporate fixed and increased per unit cost
+                  {                          //different formula for commercial and non-commercial
+                      j1 = j1+5;
+                  }
+                  if (i>200)
+                  {
+                      j2=j2+10;
+                  }
+                  total_amount = j1+j2;
+              }
+          }
+          else if (con_type == "Non-Commercial")
+          {
+              for(i=1;i <= units;i++)
+              {
+                  if (i<=100)
+                  {
+                      j1 = j1+3;
+                  }
+                  if (i>100)
+                  {
+                      j2=j2+5;
+                  }
+                  total_amount = j1+j2;
+              }
+          }
+          else
+          {
+              cout << "Invalid Customer Type!\n";
+          }
+      }
+      
+      void printBill()          //function to print final bill of customer
+      {
+          cout << "Customer Name: " << con_name << endl;
+          cout << "Customer Number: " << con_no << endl;
+          cout << "Total Electricity Bill of the month of " << bill_month << " is:\n";
+          cout << "Rs " << total_amount << endl;
+          
+      }
+    
+};
+
+int main()
+{
+    Customer c1;        //creating object of customer class
+    c1.readData();      //calling public function of class
+    c1.calculateBill();
+    c1.printBill();
+
+    return 0;
+}
