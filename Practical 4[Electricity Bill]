@@ -20,7 +20,7 @@ class Customer
       void readData()         //function to take in and read user data
       {
           cout << "Enter Name of the Customer (without spaces)\n";
-          cin >> con_name;
+          getline(cin,con_name);
           cout << "Enter the 6 digit Customer Number\n";
           cin >> con_no;
           cout << "Enter Customer Type - Commerical or Non-Commercial\n";
