@@ -1,0 +1,143 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class Player
+{
+    private:
+    string con1[10];
+    string con2[10];
+    float con3[10];
+    float con4[10];
+    
+    public:
+      int i,n;
+      string player_name[10];
+      string player_region[10];
+      float bat_avg[10];
+      float bowl_avg[10];
+      
+      void readData()
+      {
+          cout << "Enter total number of players for further selection: ";
+          cin >> n;
+          for(i=0;i<n;i++)
+          {
+              cout << "Enter Name of Player " << i+1 << endl;
+              cin >> player_name[i];
+              cout << "Enter the Region of Player " << i+1 << endl;
+              cin >> player_region[i];
+              cout << "Enter Batting Average of Player " << i+1 << endl;
+              cin >> bat_avg[i];
+              cout << "Enter Bowling Average of Player " << i+1 << endl;
+              cin >> bowl_avg[i];
+          }
+      }
+      
+      void generateList()
+      {
+          for(i=0;i<n;i++)
+          {
+              if (bat_avg[i] > 30 && bowl_avg[i] < 25)
+              {
+                  cout << player_name[i] << " is selected!\n";
+                  con1[i] = player_name[i];
+                  con2[i] = player_region[i];
+                  con3[i] = bat_avg[i];
+                  con4[i] = bowl_avg[i];
+              }
+              else
+              {
+                  cout << player_name[i] << " is not selected!\n" ;
+              }
+             
+          }
+          cout << endl;
+          cout << "Final List of players selected (UNSORTED):\n";
+          for(i=0;i<n;i++)
+          {
+              if (con3[i] > 30 && con4[i] < 25)
+              {
+                 cout << "Name - " << con1[i] << "\nRegion - " << con2[i] << "\nBatting Average - " << con3[i] <<"\nBowling Average - " << con4[i] << endl << endl; 
+              }
+          }
+      }
+      
+      void sortList1()
+      {
+          for(i=0;i<n;i++)
+          {
+              if (con3[i] > 30 && con4[i] < 25)
+              {
+                  if(con3[i] > con3[i+1])
+                 {
+                   con3[i] = bat_avg[i];
+                   con3[i+1] = con3[i];
+                   bat_avg[i] = con3[i+1];
+                 }
+              }
+              
+              
+          }
+      }
+      void sortList2()
+      {
+          for(i=0;i<n;i++)
+          {
+              if (con3[i] > 30 && con4[i] < 25)
+              {
+                  if(con4[i] > con4[i+1])
+                 {
+                   con4[i] = bowl_avg[i];
+                   con4[i+1] = con4[i];
+                   bowl_avg[i] = con4[i+1];
+                 }
+              }
+              
+          }
+      }
+        
+      void displayList()
+      {
+          
+         
+              cout << "List sorted by batting average:\n";
+              for(i=0;i<n;i++)
+              {
+                 if (con3[i] > 30 )
+                 {
+                     cout << "Name - " << con1[i]  << "\nBatting Average - " << con3[i] << endl;
+                 }
+                
+              }
+          
+              cout << "\nList sorted by bowling average:\n";
+              for(i=0;i<n;i++)
+              {
+                 if (con4[i] < 25)
+                 {
+                     cout << "Name - " << con1[i] <<"\nBowling Average - " << con4[i] << endl;
+                 }
+                
+              }
+         
+          
+      }
+      
+};
+
+
+
+int main()
+{
+    Player p1;
+    p1.readData();
+    p1.generateList();
+    p1.sortList1();
+    p1.sortList2();
+    p1.displayList();
+    
+    
+    return 0;
+}
+
