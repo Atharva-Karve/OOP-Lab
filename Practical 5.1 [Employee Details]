@@ -1,0 +1,57 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class Employee
+  {
+    public:
+      string employee_name;
+      long int employee_id;
+      string employee_dept;
+      float basic_salary;
+      float DA,HRA,TA,gross_salary;
+      
+      void read()
+      {
+          cout << "Enter Employee Name\n";
+          getline(cin,employee_name);
+          cout << "Enter Employee ID\n";
+          cin >> employee_id;
+          cout << "Enter Employee Department\n";
+          cin >> employee_dept;
+          cout << "Enter basic salary (in rupees)\n";
+          cin >> basic_salary;
+          gross_salary = basic_salary + (DA*basic_salary) + (HRA*basic_salary) + (TA*basic_salary);
+      }
+      
+      Employee()
+      {
+          DA = 0.5;
+          HRA = 0.3;
+          TA = 0.1;
+      }
+      
+      void calc_disp()
+      {
+          
+          
+          cout << "\nEmployee Details:\n";
+          cout << "Employee Name: " << employee_name << "\nEmployee ID: " << employee_id << "\nEmployee Department: " << employee_dept << endl;
+          cout << "\nSalary Details:\n";
+          cout << "Basic Salary: " << basic_salary << "\nDearness Allowance: " << (DA*basic_salary) << "\nHouse Rent Allowance: " << (HRA*basic_salary) << "\nTravelling Allowance: " << (TA*basic_salary) << "\n\nGROSS SALARY: " << gross_salary << " rupees"; 
+      }
+      
+      ~Employee()
+      {
+          cout << "\n--------------------------------------------------------";
+      }
+  };
+
+
+int main()
+{
+    Employee e1;
+    e1.read();
+    e1.calc_disp();
+    return 0;
+}
