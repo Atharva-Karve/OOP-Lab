@@ -1,0 +1,76 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class Employee
+  {
+    public:
+      string employee_name;
+      long int employee_id;
+      string employee_dept;
+      float basic_salary;
+      float DA,HRA,TA,gross_salary;
+      
+      void read()
+      {
+          cout << "Enter Employee Name\n";
+          getline(cin,employee_name);
+          cout << "Enter Employee ID\n";
+          cin >> employee_id;
+          cout << "Enter Employee Department\n";
+          cin >> employee_dept;
+          cout << "Enter basic salary (in rupees)\n";
+          cin >> basic_salary;
+      }
+      
+      Employee()
+      {
+          gross_salary = 0;
+      }
+      
+      Employee(float a)
+      {
+          basic_salary = a;
+          DA = 0.5*a;
+          HRA = 0.3*a;
+          TA = 0.1*a;
+          gross_salary = a + DA + HRA + TA;
+      }
+      
+      Employee(const Employee &e2)
+      {
+          basic_salary = e2.basic_salary;
+          DA = e2.DA;
+          HRA = e2.HRA;
+          TA = e2.TA;
+          gross_salary = e2.gross_salary;
+      }
+      void disp1()
+      {
+          cout << "\nEmployee Details:\n";
+          cout << "Employee Name: " << employee_name << "\nEmployee ID: " << employee_id << "\nEmployee Department: " << employee_dept << endl;
+          
+      }
+      
+      void disp2()
+      {
+          cout << "\nSalary Details:\n";
+          cout << "Basic Salary: " << basic_salary << "\nDearness Allowance: " << DA << "\nHouse Rent Allowance: " << HRA << "\nTravelling Allowance: " << TA << "\n\nGROSS SALARY: " << gross_salary << " rupees"; 
+      }
+       
+  };
+
+
+int main()
+{
+    Employee e1;
+    e1.read();
+    float a = e1.basic_salary;
+    Employee e2(a);
+    e1.disp1();
+    Employee e3 = e2;
+    e3.disp2();
+    return 0;
+}
+
+//e3 is copy constructor of e2, holds the same values as calculated in e2 constructor, therefore gives same output.
