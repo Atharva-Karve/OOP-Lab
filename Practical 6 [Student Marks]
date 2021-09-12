@@ -1,0 +1,77 @@
+#include <iostream>
+using namespace std;
+class TEE;  //declaration of class- needed to declare friend function in first class
+class ICA    
+  {
+     private:
+       int m1;
+       int opp1;
+       int se1;
+       int ds1;
+     
+     public:
+       void read1()
+       {
+           cout << "Internal Marks:-\n";
+           cout << "Enter ICA marks of Math (out of 50):\n";
+           cin >> m1;
+           cout << "Enter ICA marks of OPP (out of 50):\n";
+           cin >> opp1;
+           cout << "Enter ICA marks of SE (out of 50):\n";
+           cin >> se1;
+           cout << "Enter ICA marks of DS (out of 50):\n";
+           cin >> ds1;
+       }
+       
+       friend void calc_display(ICA,TEE);   //friend function of both classes ICA and TEE
+  };
+  
+class TEE 
+  {
+     private:
+       int m2;
+       int opp2;
+       int se2;
+       int ds2;
+     
+     public:
+       void read2()
+       {
+           cout << "\nExternal Marks:-\n";
+           cout << "Enter TEE marks of Math (out of 50):\n";
+           cin >> m2;
+           cout << "Enter TEE marks of OPP (out of 50):\n";
+           cin >> opp2;
+           cout << "Enter TEE marks of SE (out of 50):\n";
+           cin >> se2;
+           cout << "Enter TEE marks of DS (out of 50):\n";
+           cin >> ds2;
+       }
+       
+       friend void calc_display(ICA,TEE);    //friend function
+  };
+  
+void calc_display(ICA ob1, TEE ob2)          //calling friend function by creating objects of both classes
+{
+    int t1,t2,t3,t4;                 //total marks of each subject
+    t1 = ob1.m1 + ob2.m2;               
+    t2 = ob1.opp1 + ob2.opp2;
+    t3 = ob1.se1 + ob2.se2;
+    t4 = ob1.ds1 + ob2.ds2;
+    cout << "\nTotal Marks of Math:\n" << t1 << " out of 100\n";
+    cout << "Total Marks of OPP:\n" << t2 << " out of 100\n";
+    cout << "Total Marks of SE:\n" << t3 << " out of 100\n";
+    cout << "Total Marks of DS:\n" << t4 << " out of 100\n";
+    cout << "Total Marks of student - " << t1+t2+t3+t4 << " out of 400\n";
+}
+
+int main()
+{
+    ICA obj1;
+    TEE obj2;
+    obj1.read1();
+    obj2.read2();
+    calc_display(obj1,obj2);          //function called in main, obj1 and obj2 being actual parameters
+
+    return 0;
+}
