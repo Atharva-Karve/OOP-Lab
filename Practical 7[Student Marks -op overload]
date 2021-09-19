@@ -1,0 +1,141 @@
+#include <iostream>
+using namespace std;
+class External1;  //declaration of class- needed to declare friend function in first class
+class Internal1    
+  {
+     private:
+       int m1;
+       int opp1;
+       int se1;
+       int ds1;
+       int ti;
+     
+     public:
+       Internal1()
+       {
+           m1 = 0;
+           opp1 = 0;
+           se1 = 0;
+           ds1 = 0;
+           ti = 0;
+       }
+       void read1()
+       {
+           cout << "Internal Marks:-\n";
+           cout << "Enter ICA marks of Math (out of 50):\n";
+           cin >> m1;
+           cout << "Enter ICA marks of OPP (out of 50):\n";
+           cin >> opp1;
+           cout << "Enter ICA marks of SE (out of 50):\n";
+           cin >> se1;
+           cout << "Enter ICA marks of DS (out of 50):\n";
+           cin >> ds1;
+       }
+       
+       friend void operator+(Internal1,External1) ;    //friend function with binary operator overload
+  };
+  
+class External1 
+  {
+     private:
+       int m2;
+       int opp2;
+       int se2;
+       int ds2;
+       int te;
+     
+     public:
+     External1()
+       {
+           m2 = 0;
+           opp2 = 0;
+           se2 = 0;
+           ds2 = 0;
+           te = 0;
+       }
+       void read2()
+       {
+           cout << "\nExternal Marks:-\n";
+           cout << "Enter TEE marks of Math (out of 50):\n";
+           cin >> m2;
+           cout << "Enter TEE marks of OPP (out of 50):\n";
+           cin >> opp2;
+           cout << "Enter TEE marks of SE (out of 50):\n";
+           cin >> se2;
+           cout << "Enter TEE marks of DS (out of 50):\n";
+           cin >> ds2;
+       }
+       
+       friend void operator+(Internal1,External1);    //friend function with binary operator overload
+  };
+  
+void operator+(Internal1 ob1, External1 ob2)          
+{
+    float t1,t2,t3,t4; //total marks of each subject
+    float per;
+    ob1.ti = ob1.m1 + ob1.opp1 + ob1.se1 + ob1.ds1;      //total internal marks
+    ob2.te = ob2.m2 + ob2.opp2 + ob2.se2 + ob2.ds2;     // total external marks
+    t1 = ob1.m1 + ob2.m2;               
+    t2 = ob1.opp1 + ob2.opp2;
+    t3 = ob1.se1 + ob2.se2;
+    t4 = ob1.ds1 + ob2.ds2;
+    cout << "\nTotal Marks of Math:\n" << t1 << " out of 100\n";
+    if (t1 < 50)
+    {
+        cout << "Failed in Maths\n";
+    }
+    else
+    {
+        cout << "Passed in Maths\n";
+    }
+    cout << "\nTotal Marks of OPP:\n" << t2 << " out of 100\n";
+    if (t2 < 50)
+    {
+        cout << "Failed in OPP\n";
+    }
+    else
+    {
+        cout << "Passed in OPP\n";
+    }
+    cout << "\nTotal Marks of SE:\n" << t3 << " out of 100\n";
+    if (t3 < 50)
+    {
+        cout << "Failed in SE\n";
+    }
+    else
+    {
+        cout << "Passed in SE\n";
+    }
+    cout << "\nTotal Marks of DS:\n" << t4 << " out of 100\n";
+    if (t4 < 50)
+    {
+        cout << "Failed in DS\n";
+    }
+    else
+    {
+        cout << "Passed in DS\n";
+    }
+    cout << "\nTotal Marks of student - " << ob1.ti + ob2.te << " out of 400\n";
+    per = ((t1+t2+t3+t4)/400)*100;
+    if ((t1+t2+t3+t4) >= 200)
+    {
+        cout << "Total Percentage of student - " << per << "%\n" ;
+    }
+    
+    else 
+    {
+        cout << "Student has failed in atleast one subject.\n";
+    }
+}
+
+int main()
+{
+    Internal1 obj1;
+    External1 obj2;
+    obj1.read1();
+    obj2.read2();
+    operator+(obj1,obj2);          //function called in main, obj1 and obj2 being actual parameters
+
+    return 0;
+}
+
