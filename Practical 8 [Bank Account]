@@ -1,0 +1,185 @@
+#include <iostream>
+#include <cstring>
+#include <cmath>
+using namespace std;
+class account
+{
+  public:
+    string customer_name;
+    long int account_number;
+    string type_account;
+  
+    void login()
+    {
+      cout << "Enter Customer Name:\n";
+      getline(cin,customer_name);
+      cout << "Enter Account Number:\n";
+      cin >> account_number;
+      cout << "Enter Account Type:\nSavings Account or Current Account?\n";
+      cin >> type_account;
+    }
+
+   
+
+
+};
+
+class sav_acct : public account
+{
+  public:
+  long int balance1;
+  long int withdraw;
+  int time,i;
+  long int investment;
+  double x;
+
+   void deposit()
+  {
+      cout << "Enter amount to be deposited in the account:(in rupees)\n";
+      cin >> balance1;
+  }
+
+  void display()
+  {
+     cout << "Your current balance is " << balance1 << " rupees" << endl;
+  }
+
+  void compund_interest()
+  {
+     cout << "Enter amount to invest in the compund interest plan:\n";
+     cin >> investment;
+     cout << "Enter number of years for respective plan:\n";
+     cin >> time;
+     x = investment * pow((1.11),time) ;
+     cout << "Total amount earned after " << time << " years, for 11% annual rate of interest, is " << x << " rupees\n";
+  }
+
+  void withdrawal()
+  {
+    cout << "Enter amount to be withdrawn:\n";
+    cin >> withdraw;
+    if (withdraw < balance1)
+    {
+      balance1 = balance1 - withdraw;
+      cout << "Updated balance after withdrawal is " << balance1 << " rupees" << endl;
+    }
+    
+    else
+    {
+      cout << "Invalid amount\n";
+    } 
+  }
+
+};
+
+class cur_acct : public account
+{
+  public:
+  long int balance2;
+  long int y,z;
+
+   void deposit()
+  {
+      cout << "Enter amount to be deposited in the account:(in rupees)\n";
+      cin >> balance2;
+  }
+
+  void display()
+  {
+     cout << "Your current balance is " << balance2 << " rupees" << endl;
+  }
+  void check_balance()
+  {
+    cout << "Verifying account balance...\n";
+    z = balance2;
+    cout << z << endl;
+    if (z < 10000)
+    {
+      cout << "Balance is less than minimum required balance for a current account.\n";
+      cout << "Penalty of 500 rupees is imposed.\n";
+      y = z - 500 ;
+      cout << "Updated balance after penalty is " << y << " rupees" << endl;
+    }
+    else
+    {
+      cout << "Balance is sufficient for current account, no penalty imposed.\n";
+    }
+  }
+};
+
+int main() 
+{
+ int n;
+ account a1;
+ sav_acct s1;
+ cur_acct c1;
+ a1.login();
+ if (a1.type_account == "Savings")
+ {
+   cout << "\nCheque book facility unavailable.\n";
+   do
+   {
+     cout << "Choose task:\n1) Deposit & Display Account\n2) Compound Interest Plan\n3) Withdrawal\n4) Exit\n";
+     cin >> n;
+     switch (n)
+     {
+       case 1:
+       s1.deposit();
+       cout << "\nCustomer Name - " << a1.customer_name << "\nAccount Number - " << a1.account_number << "\nType of Account - " << a1.type_account << endl ;
+       s1.display();
+       break;
+
+       case 2:
+       cout << "\n";
+       s1.compund_interest();
+       break;
+
+       case 3:
+       cout << "\n";
+       s1.withdrawal();
+       break;
+
+       case 4:
+       cout << "\nProgram Ended\n";
+       break;
+
+       default:
+       cout << "Invalid Input\n";
+     }
+   }
+   while (n != 4);
+ }
+
+ if (a1.type_account == "Current")
+ {
+   cout << "\nCheque book facility available.\n";
+   do
+   {
+     cout << "Choose task:\n1) Deposit & Display Account\n2) Check for Minimum Balance \n3) Exit\n"; 
+     cin >> n;
+     switch (n)
+     {
+       case 1:
+       c1.deposit();
+       cout << "\nCustomer Name - " << a1.customer_name << "\nAccount Number - " << a1.account_number << "\nType of Account - " << a1.type_account << endl ;
+       c1.display();
+       break;
+
+       case 2:
+       cout << "\n";
+       c1.check_balance();
+       break;
+
+       case 3:
+       cout << "\nProgram Ended\n";
+       break;
+
+       default:
+       cout << "Invalid Input\n";
+     }
+   }
+   while (n != 3);
+ }
+
+
+}
