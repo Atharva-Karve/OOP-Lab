@@ -1,0 +1,134 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class staff
+{
+  public:
+  int code;
+  string name,category;
+  void input()
+  {
+    cout << "Enter Name of staff member:\n";
+    getline(cin,name);
+    cout << "Enter Code - 1,2 or 3\n";
+    cin >> code;
+  }
+
+  void display()
+  {
+    if (code == 1)
+    {
+      category = "Teacher";
+    }
+    else if (code == 2)
+    {
+      category = "Typist";
+    }
+    else if (code == 3)
+    {
+      category = "Officer";
+    }
+    else 
+    {
+      cout << "Invalid Code!";
+    }
+    cout << "Category of Staff with respect to given details is " << category << endl;
+  }
+};
+
+class teacher : public staff
+{
+  public:
+  string subject;
+  string publication;
+  
+  void input2()
+  {
+    cout << "Enter Subject taught by teacher:\n";
+    cin >> subject;
+    cout << "Enter Publication of reference book used:\n";
+    cin >> publication;
+  }
+};
+
+class officer : public staff
+{
+  public:
+  int grade;
+  void input3()
+  {
+    cout << "Enter Grade under responsibility of officer:\n";
+    cin >> grade;
+  }
+};
+
+class typist : public staff
+{
+  public:
+  int type_speed;
+  string category1;
+  void input4()
+  {
+    cout << "Enter the speed of typist in words per minute:\n";
+    cin >> type_speed;
+  }
+};
+
+class regular_typist : public typist
+{
+  public:
+  void result()
+  {
+    cout << "Regular typist practices typing for an average of 2 hours a day.\n";
+  }
+};
+
+class casual_typist : public typist
+{
+  public:
+  int daily_wage = 1500;
+  void result1()
+  {
+    cout << "A casual typist practices typing for an average of 5 hours per day.\n";
+    cout << "They are paid typists who earn " << daily_wage << " rupees daily as they work under the university." << endl ;
+  }
+};
+
+int main() 
+{
+  staff s;
+  teacher t1;
+  officer o;
+  typist t2;
+  regular_typist rt;
+  casual_typist ct;
+  s.input();
+  s.display();
+  if (s.category == "Teacher")
+  {
+    t1.input2();
+    cout << "Details of teacher:\n";
+    cout << "Name - " << s.name << "\nSubject - " << t1.subject << "\nPublication of reference book - " << t1.publication << endl;
+  }
+
+  else if (s.category == "Typist")
+  {
+    t2.input4();
+    if (t2.type_speed <= 50)
+    {
+      cout << s.name << " is a regular typist.\n";
+      rt.result();
+    }
+    else 
+    {
+      cout << s.name << " is a casual typist working for the university.\n";
+      ct.result1();
+    }
+  }
+  else if (s.category == "Officer")
+  {
+    o.input3();
+    cout << s.name << " handles the responsibility of managing grade " << o.grade << " in the university." << endl ;
+  }
+}
