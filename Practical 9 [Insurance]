@@ -1,0 +1,277 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class Bank_Acct
+{
+  public:
+  string cust_name;
+  string cust_add;
+  int cust_age;
+  long int acct_no;
+  long int balance;
+
+  void open_acct()
+  {
+    cout << "Enter customer name:\n";
+    getline(cin,cust_name);
+    cout << "Enter customer address:\n";
+    getline(cin,cust_add);
+    cout << "Enter customer age:\n";
+    cin >> cust_age;
+    cout << "Enter account number:\n";
+    cin >> acct_no;
+  }
+
+  void deposit()
+  {
+    long int a;
+    balance = 0;
+    cout << "Enter amount to be deposited (in rupees):\n";
+    cin >> a;
+    balance = a + balance;
+  }
+
+  void withdraw()
+  {
+    long int b;
+    cout << "Enter amount to be withdrawn (in rupees):\n";
+    cin >> b;
+     if (b < balance)
+    {
+      balance = balance - b;
+    }
+    
+    else
+    {
+      cout << "Invalid amount\n";
+    } 
+  }
+  void balancedisp()
+  {
+    cout << "Initial bank balance: " << balance << endl;
+  }
+  void display_acct()
+  {
+    cout << "Bank Account Details:\nCustomer Name: " << cust_name << "\nCustomer Address: " << cust_add << "\nCustomer Age: " << cust_age << "\nSavings Account Number: " << acct_no << "\nBank Balance: " << balance << " rupees" << endl;
+  }
+
+   
+};
+
+
+class Life_Insurance : virtual public Bank_Acct
+{
+  public:
+  long int policy_no1;
+  float term1;
+  long int sum_assured,cust_salary;
+  long int premium1;
+
+  void read_data1()
+  {
+    cout << "Enter policy number:\n";
+    cin >> policy_no1;
+    cout << "Enter length of term (in years):\n";
+    cin >> term1;
+    cout << "Enter customer salary (per year):\n";
+    cin >> cust_salary;
+    sum_assured = cust_salary * 10 ;
+  }
+
+  void calc_premium1()
+  {
+    cout << "Reconfirm age of customer:\n";
+    cin >> cust_age;
+    if (cust_age < 25)
+    {
+      cout << "Premium for Life Insurance is 3000 rupees per year\n";
+      premium1 = 3000 * term1;
+      cout << "Total cost after " << term1 << " years is: " << premium1 << endl;
+    } 
+
+    else if (cust_age > 25 && cust_age < 46)
+    {
+      cout << "Premium for Life Insurance is 4000 rupees per year\n";
+      premium1 = 4000 * term1;
+      cout << "Total cost after " << term1 << " years is: " << premium1 << endl;
+    } 
+
+    else if (cust_age > 45 && cust_age <= 60)
+    {
+      cout << "Premium for Life Insurance is 5000 rupees per year\n";
+      premium1 = 5000 * term1;
+      cout << "Total cost after " << term1 << " years is: " << premium1 << endl;
+    } 
+
+    else
+    {
+      cout << "No Life Insurance Available!\n";
+    }
+
+  }
+
+  void disp_life()
+  {
+    cout << "Policy Number: " << policy_no1 << "\nSum Assured: " << sum_assured << " rupees\nPremium: " << premium1 << " rupees" << endl;
+  }
+
+ 
+};
+
+class Car_Insurance : virtual public Bank_Acct
+{
+  public:
+  long int policy_no2;
+  float term2,car_age;
+  //long int sum_assured2 = 800000;
+  long int premium2;
+
+  void read_data2()
+  {
+    cout << "Enter policy number:\n";
+    cin >> policy_no2;
+    cout << "Enter length of term (in years):\n";
+    cin >> term2;
+    
+  }
+
+  void calc_premium2()
+  {
+    cout << "Enter age of car (in years):\n";
+    cin >> car_age;
+    if (car_age < 2)
+    {
+      cout << "Premium for Car Insurance is 5000 rupees per year\n";
+      premium2 = 5000 * term2;
+      cout << "Total cost after " << term2 << " years is: " << premium2 << endl;
+     
+    } 
+
+    else if (car_age >= 2 && car_age < 5)
+    {
+      cout << "Premium for Car Insurance is 3000 rupees per year\n";
+      premium2 = 3000 * term2;
+      cout << "Total cost after " << term2 << " years is: " << premium2 << endl;
+    } 
+
+    else
+    {
+      cout << "Premium for Car Insurance is 2000 rupees per year\n";
+      premium2 = 2000 * term2;
+      cout << "Total cost after " << term2 << " years is: " << premium2 << endl;
+    }
+
+  }
+
+  void disp_car()
+  {
+    cout << "Policy Number: " << policy_no2 << "\nSum Assured: 800000" << " rupees\nPremium: " << premium2 << " rupees" << endl;
+  }
+};
+
+class Claim : public Life_Insurance, public Car_Insurance
+{
+  public:
+  Bank_Acct ba;
+  long int final_deposit;
+  float end_term;
+  long int car_repair;
+  string c;
+  void Settlement()
+  {
+    cout << "Enter number of years since policy was purchased:\n";
+    cin >> end_term;
+    cout << "Enter type of insurance to claim (Life or Car):\n";
+    cin >> c;
+    if(c == "Life")
+    {
+      term1 = end_term;
+      calc_premium1();
+      if (term1 < 5)
+      {
+        cout << "No deposit made!\n";
+      }
+
+      else if (4 < term1 && term1 <= 12 )
+      {
+        final_deposit = 0.25 * sum_assured;
+        cout << "Final deposit made in savings account is: " << final_deposit << " rupees" << endl;
+        balance = balance - premium1 + final_deposit ; 
+      }
+
+      else if (12 < term1 && term1 <= 20 )
+      {
+        final_deposit = (0.7 * sum_assured);
+        cout << "Final deposit made in savings account is: " << final_deposit << " rupees" << endl;
+        balance = balance - premium1 + final_deposit ; 
+      }
+
+      else 
+      {
+        final_deposit = 2*sum_assured;
+        cout << "Final deposit made in savings account is: " << final_deposit << " rupees" << endl;
+        balance = balance - premium1 + final_deposit ; 
+      }
+
+    }
+
+    else if (c == "Car")
+    {
+      //Car_Insurance ci;
+      term2 = end_term;
+      cout << "Amount spent on car repair:\n";
+      cin >> car_repair;
+      calc_premium2();
+      cout << "Final deposit made in savings account is: " << car_repair << " rupees" << endl;
+      balance = balance - premium2 + car_repair;
+    }
+  }
+
+  void final_disp()
+  {
+    cout << "\nUpdated Bank Balance: " << balance << " rupees" << endl;
+  }
+
+};
+
+int main() 
+{
+  int x;
+  Bank_Acct object;
+  Life_Insurance object1;
+  Car_Insurance object2;
+  Claim obj;
+  cout << "Opening Savings Account:\n";
+  object.open_acct();
+  object.deposit();
+  object.withdraw();
+  object.display_acct();
+  cout << "\nChoose from following options:\n1)Life Insurance Plan\n2)Car Insurance Plan\n";
+  cin >> x;
+  if (x==1)
+  {
+    cout << "\nLife Insurance Policy:\n";
+    obj.read_data1();
+    obj.calc_premium1();
+    obj.disp_life();
+  }
+  
+  else if(x==2)
+  {
+     cout << "\nCar Insurance Policy:\n";
+     obj.read_data2();
+     obj.calc_premium2();
+     obj.disp_car();
+  }
+
+  else
+  {
+    cout << "Incorrect Option\n";
+  }
+ 
+  cout << "\nInsurance Claim:\n";
+  obj.Settlement();
+  obj.balance = object.balance + obj.balance;
+  obj.final_disp();
+}
